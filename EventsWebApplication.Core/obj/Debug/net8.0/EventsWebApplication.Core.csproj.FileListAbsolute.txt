@@ -1,0 +1,15 @@
+D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\obj\Debug\net8.0\EventsWebApplication.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\obj\Debug\net8.0\EventsWebApplication.Core.AssemblyInfoInputs.cache
+D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\obj\Debug\net8.0\EventsWebApplication.Core.AssemblyInfo.cs
+D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\obj\Debug\net8.0\EventsWebApplication.Core.csproj.CoreCompileInputs.cache
+D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\obj\Debug\net8.0\EventsWebApplication.Core.csproj.AssemblyReference.cache
+D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\bin\Debug\net8.0\EventsWebApplication.Core.deps.json
+D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\bin\Debug\net8.0\EventsWebApplication.Core.dll
+D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\bin\Debug\net8.0\EventsWebApplication.Core.pdb
+D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\obj\Debug\net8.0\EventsWebApplication.Core.dll
+D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\obj\Debug\net8.0\refint\EventsWebApplication.Core.dll
+D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\obj\Debug\net8.0\EventsWebApplication.Core.pdb
+D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\obj\Debug\net8.0\ref\EventsWebApplication.Core.dll
+D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\bin\Debug\net8.0\EventsWebApplication.Core.runtimeconfig.json
+D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\obj\Debug\net8.0\EventsWebApplication.Core.genruntimeconfig.cache
+D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\obj\Debug\net8.0\EventsWebApplication.Core.sourcelink.json
