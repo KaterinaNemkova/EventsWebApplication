@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsWebApplication.DataAc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsWebApplication.Application", "EventsWebApplication.Application\EventsWebApplication.Application.csproj", "{162A1C09-D95C-48A4-A30C-AB398A5EF89A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsWebApplication.Infrastructure", "EventsWebApplication.Infrastructure\EventsWebApplication.Infrastructure.csproj", "{246E9D06-DF3B-4C71-B42E-D127BB572764}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsWebApplication.Infrastructure", "EventsWebApplication.Infrastructure\EventsWebApplication.Infrastructure.csproj", "{246E9D06-DF3B-4C71-B42E-D127BB572764}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
