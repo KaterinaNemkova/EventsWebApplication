@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "qdlCcSiz2/RbekZqCeU6MRLxQaZiPjI2Gjqb94Kac5E=",
+  "Hash": "0AALBLH9EOZ0FuCc+0gP5Piddh9IfS3EN/tneh4vykQ=",
   "Source": "EventsWebApplication.Api",
   "BasePath": "_content/EventsWebApplication.Api",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "EventsWebApplication.Api\\wwwroot",
       "Source": "EventsWebApplication.Api",
-      "ContentRoot": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication\\wwwroot\\",
+      "ContentRoot": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication.Api\\wwwroot\\",
       "BasePath": "_content/EventsWebApplication.Api",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication\\wwwroot\\images\\0436721b-36fe-44d2-b7aa-b13c86c6a9c2.jpg",
+      "Identity": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication.Api\\wwwroot\\images\\0436721b-36fe-44d2-b7aa-b13c86c6a9c2.jpg",
       "SourceId": "EventsWebApplication.Api",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication\\wwwroot\\",
+      "ContentRoot": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication.Api\\wwwroot\\",
       "BasePath": "_content/EventsWebApplication.Api",
       "RelativePath": "images/0436721b-36fe-44d2-b7aa-b13c86c6a9c2.jpg",
       "AssetKind": "All",

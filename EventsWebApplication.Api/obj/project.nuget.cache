@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fDqmc3FJ7IgNQebO3lHbG9pX040bI0w01QqLp8mze8Vgka0/H2Ufq31Nv5iC/CtlQonNyQaoYLDtq99tQnGRng==",
+  "dgSpecHash": "DzymPcxPa5azvtjiXUc5JK+U0FvYJoIhxoR4lyxuiaQ3xh6SByWPawVHnmdn2Xki6pxL3f2qpzGba5Snhs25fQ==",
   "success": true,
-  "projectFilePath": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication\\EventsWebApplication.Api.csproj",
+  "projectFilePath": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication.Api\\EventsWebApplication.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HP\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",

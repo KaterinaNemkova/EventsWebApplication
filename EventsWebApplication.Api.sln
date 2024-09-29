@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsWebApplication.Api", "EventsWebApplication\EventsWebApplication.Api.csproj", "{D0E34C91-5E6A-4CFF-A0DB-CE3641AB9C26}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsWebApplication.Core", "EventsWebApplication.Core\EventsWebApplication.Core.csproj", "{F037FB63-0C27-4B18-B1A8-AE622850FACD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsWebApplication.DataAccess", "EventsWebApplication.DataAccess\EventsWebApplication.DataAccess.csproj", "{FD1EF8EC-BA6D-424A-B6DE-30747E95C9B5}"
@@ -13,16 +11,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsWebApplication.Applic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsWebApplication.Infrastructure", "EventsWebApplication.Infrastructure\EventsWebApplication.Infrastructure.csproj", "{246E9D06-DF3B-4C71-B42E-D127BB572764}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsWebApplication.Api", "EventsWebApplication.Api\EventsWebApplication.Api.csproj", "{EBA93AE5-8F69-41D3-A434-D30DD6A46564}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D0E34C91-5E6A-4CFF-A0DB-CE3641AB9C26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0E34C91-5E6A-4CFF-A0DB-CE3641AB9C26}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0E34C91-5E6A-4CFF-A0DB-CE3641AB9C26}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0E34C91-5E6A-4CFF-A0DB-CE3641AB9C26}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F037FB63-0C27-4B18-B1A8-AE622850FACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F037FB63-0C27-4B18-B1A8-AE622850FACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F037FB63-0C27-4B18-B1A8-AE622850FACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{246E9D06-DF3B-4C71-B42E-D127BB572764}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{246E9D06-DF3B-4C71-B42E-D127BB572764}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{246E9D06-DF3B-4C71-B42E-D127BB572764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBA93AE5-8F69-41D3-A434-D30DD6A46564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBA93AE5-8F69-41D3-A434-D30DD6A46564}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBA93AE5-8F69-41D3-A434-D30DD6A46564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBA93AE5-8F69-41D3-A434-D30DD6A46564}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
