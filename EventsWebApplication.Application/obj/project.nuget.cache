@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "U3tuOu7OhUa4K+55VXGhL7YbYr+d87mJkm5MyrjcMZrgCqiDohpDHZBIJC1B2MlZqLxWAsFX70y76LpkYF2W9Q==",
+  "dgSpecHash": "Vi95jotncYSZfncHrrSUd3ukJdLbO1vser7vtyaH1GWpM5V+JXyZlE0iSI2Zb17HHyVGUOoejwKr99XB/Op4+A==",
   "success": true,
   "projectFilePath": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication.Application\\EventsWebApplication.Application.csproj",
   "expectedPackageFiles": [
@@ -23,6 +23,7 @@
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.8\\microsoft.entityframeworkcore.abstractions.8.0.8.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.8\\microsoft.entityframeworkcore.analyzers.8.0.8.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.entityframeworkcore.design\\8.0.8\\microsoft.entityframeworkcore.design.8.0.8.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\8.0.8\\microsoft.entityframeworkcore.inmemory.8.0.8.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\8.0.8\\microsoft.entityframeworkcore.relational.8.0.8.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.8\\microsoft.entityframeworkcore.tools.8.0.8.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\8.0.0\\microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",

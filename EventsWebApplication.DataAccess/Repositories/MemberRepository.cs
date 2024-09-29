@@ -5,17 +5,9 @@ using AutoMapper;
 
 namespace EventsWebApplication.DataAccess.Repositories
 {
-    public class MemberRepository : IMemberRepository
+    public class MemberRepository(EventsApplicationDbContext context) : IMemberRepository
     {
-        private readonly EventsApplicationDbContext _context;
-        private readonly IMapper _mapper;
-
-        public MemberRepository(EventsApplicationDbContext context,IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
-
+        private readonly EventsApplicationDbContext _context = context;
 
         public async Task<bool> Add(Guid eventId, Guid userId, string surname, DateOnly birthDate, DateOnly registrDate)
         {

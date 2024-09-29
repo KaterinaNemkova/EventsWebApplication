@@ -130,3 +130,4 @@ D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Tests\bin\Debug
 D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Tests\bin\Debug\net8.0\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Tests\bin\Debug\net8.0\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
 D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Tests\obj\Debug\net8.0\EventsWebApplication.Tests.genruntimeconfig.cache
+D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Tests\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll

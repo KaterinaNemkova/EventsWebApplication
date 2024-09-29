@@ -185,3 +185,4 @@ D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\bin\Debug\
 D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\bin\Debug\net8.0\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\bin\Debug\net8.0\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
 D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\obj\Debug\net8.0\EventsWe.838C1933.Up2Date
+D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Core\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll

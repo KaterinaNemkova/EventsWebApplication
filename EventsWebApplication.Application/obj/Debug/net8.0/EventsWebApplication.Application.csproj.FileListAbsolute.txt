@@ -190,3 +190,4 @@ D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Application\bin
 D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Application\bin\Debug\net8.0\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Application\bin\Debug\net8.0\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Application\bin\Debug\net8.0\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Application\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll
