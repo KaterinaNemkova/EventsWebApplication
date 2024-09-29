@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EventsWebApplication.Application\EventsWebApplication.Application.csproj" />
+    <ProjectReference Include="..\EventsWebApplication.Core\EventsWebApplication.Core.csproj" />
+    <ProjectReference Include="..\EventsWebApplication.DataAccess\EventsWebApplication.DataAccess.csproj" />
+  </ItemGroup>
+
+</Project>
