@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "qdlCcSiz2/RbekZqCeU6MRLxQaZiPjI2Gjqb94Kac5E=",
+  "Source": "EventsWebApplication.Api",
+  "BasePath": "_content/EventsWebApplication.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "EventsWebApplication.Api\\wwwroot",
+      "Source": "EventsWebApplication.Api",
+      "ContentRoot": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication\\wwwroot\\",
+      "BasePath": "_content/EventsWebApplication.Api",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication\\wwwroot\\images\\0436721b-36fe-44d2-b7aa-b13c86c6a9c2.jpg",
+      "SourceId": "EventsWebApplication.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication\\wwwroot\\",
+      "BasePath": "_content/EventsWebApplication.Api",
+      "RelativePath": "images/0436721b-36fe-44d2-b7aa-b13c86c6a9c2.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\0436721b-36fe-44d2-b7aa-b13c86c6a9c2.jpg"
+    }
+  ]
+}
