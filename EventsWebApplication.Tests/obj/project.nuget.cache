@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "c3wXOqL2bEDK7XZytgx4Iyo+ibAczk/M0Z0O+ab3P4wkm4KIOOfUo3LZjiAbzzYZHo1qWhDhWFoWydrHgffs8Q==",
+  "dgSpecHash": "3KcdUreiD1zCJ5GCWdKEmG7mfyFNO/FpChVWS79Wl0dMTWPEGfjc4IAQ1Cu7RoSeizXl0IDQFgDtB3Up+iYvUw==",
   "success": true,
   "projectFilePath": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication.Tests\\EventsWebApplication.Tests.csproj",
   "expectedPackageFiles": [
@@ -10,8 +10,6 @@
     "C:\\Users\\HP\\.nuget\\packages\\fluentvalidation\\11.10.0\\fluentvalidation.11.10.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
-    "C:\\Users\\HP\\.nuget\\packages\\mediatr\\12.4.1\\mediatr.12.4.1.nupkg.sha512",
-    "C:\\Users\\HP\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.8\\microsoft.aspnetcore.authentication.jwtbearer.8.0.8.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.codecoverage\\17.11.1\\microsoft.codecoverage.17.11.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.8\\microsoft.entityframeworkcore.8.0.8.nupkg.sha512",
