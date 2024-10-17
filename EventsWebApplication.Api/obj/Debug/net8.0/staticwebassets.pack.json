@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\images\\0436721b-36fe-44d2-b7aa-b13c86c6a9c2.jpg"
     },
     {
+      "Id": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication.Api\\wwwroot\\images\\4a726797-ecb9-49ec-bae5-42cb2f811784.jfif",
+      "PackagePath": "staticwebassets\\images\\4a726797-ecb9-49ec-bae5-42cb2f811784.jfif"
+    },
+    {
+      "Id": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication.Api\\wwwroot\\images\\загрузка.jfif",
+      "PackagePath": "staticwebassets\\images\\загрузка.jfif"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.EventsWebApplication.Api.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

@@ -1,8 +1,8 @@
-﻿using EventsWebApplication.Application.Services;
-using EventsWebApplication.Core.Contracts;
-using FluentValidation;
-using FluentValidation.Results;
+﻿using EventsWebApplication.Application.Users.Login;
+using EventsWebApplication.Application.Users.RefreshToken;
+using EventsWebApplication.Application.Users.Registration;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace EventsWebApplication.Api.Controllers
 {
@@ -10,58 +10,51 @@ namespace EventsWebApplication.Api.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
+        private readonly UserRegistrationUseCase _userRegistrationUseCase;
+        private readonly UserLoginUseCase _userLoginUseCase;
+        private readonly RefreshTokenUseCase _refreshTokenUseCase;
 
-        private readonly IUserService _service;
-        private readonly IValidator<RegisterUserRequest> _validator;
-        private readonly IValidator<LoginUserRequest> _loginValidator;
-
-
-        public UserController(IUserService service, IValidator<RegisterUserRequest> validator, IValidator<LoginUserRequest> loginValidator)
+        public UserController(UserRegistrationUseCase userRegistrationUseCase, UserLoginUseCase userLoginUseCase, RefreshTokenUseCase refreshTokenUseCase)
         {
-
-            _service = service;
-            _validator = validator;
-            _loginValidator = loginValidator;
+            _userRegistrationUseCase = userRegistrationUseCase;
+            _userLoginUseCase = userLoginUseCase;
+            _refreshTokenUseCase = refreshTokenUseCase;
 
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterUserRequest request)
+        public async Task<IActionResult> Register([FromBody] UserRegistrationRequest request)
         {
-            ValidationResult result = await _validator.ValidateAsync(request);
-
-            if (!result.IsValid)
-            {
-                return BadRequest(result.Errors);
-            }
-            await _service.Register(request.userName, request.email, request.password);
-
-            return Ok(request);
+            UserRegistrationResponse response = await _userRegistrationUseCase.Register(request);
+            return Ok(response);
         }
 
         [HttpPost("login")]
 
-        public async Task<IActionResult> Login([FromBody] LoginUserRequest request)
+        public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
         {
-            try
-            {
-                ValidationResult result = await _loginValidator.ValidateAsync(request);
+            UserLoginResponse response = await _userLoginUseCase.Login(request);
+            HttpContext.Response.Cookies.Append("tasty-cookies", response.JwtToken);
 
-                if (!result.IsValid)
-                {
-                    return BadRequest(result.Errors);
-                }
-                var token = await _service.Login(request.email, request.password);
+            return Ok(response);
 
-                HttpContext.Response.Cookies.Append("tasty-cookies", token);
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-           
         }
+
+        [HttpPost("refresh /{refreshToken}")]
+
+        public async Task<IActionResult> Refresh([FromRoute] string refreshToken )
+        {
+            if (!Request.Cookies.TryGetValue("tasty-cookies", out var jwtToken))
+            {
+                return Unauthorized();
+            }
+            
+            RefreshTokenResponse response = await _refreshTokenUseCase.Refresh(new RefreshTokenRequest { JwtToken = jwtToken, RefreshToken = refreshToken });
+            HttpContext.Response.Cookies.Append("tasty-cookies", response.JwtToken);
+            return Ok(response);
+
+        }
+
+
     }
 }

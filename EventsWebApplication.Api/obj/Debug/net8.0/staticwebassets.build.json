@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0AALBLH9EOZ0FuCc+0gP5Piddh9IfS3EN/tneh4vykQ=",
+  "Hash": "bE1MK/1Abn3WsWm4L8uUs8wkEYLzceTh5MM5p2Eqk9I=",
   "Source": "EventsWebApplication.Api",
   "BasePath": "_content/EventsWebApplication.Api",
   "Mode": "Default",
@@ -34,6 +34,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\0436721b-36fe-44d2-b7aa-b13c86c6a9c2.jpg"
+    },
+    {
+      "Identity": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication.Api\\wwwroot\\images\\4a726797-ecb9-49ec-bae5-42cb2f811784.jfif",
+      "SourceId": "EventsWebApplication.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication.Api\\wwwroot\\",
+      "BasePath": "_content/EventsWebApplication.Api",
+      "RelativePath": "images/4a726797-ecb9-49ec-bae5-42cb2f811784.jfif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\4a726797-ecb9-49ec-bae5-42cb2f811784.jfif"
+    },
+    {
+      "Identity": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication.Api\\wwwroot\\images\\загрузка.jfif",
+      "SourceId": "EventsWebApplication.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ProjectsCиШарп\\EventsWebApplication\\EventsWebApplication.Api\\wwwroot\\",
+      "BasePath": "_content/EventsWebApplication.Api",
+      "RelativePath": "images/загрузка.jfif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\загрузка.jfif"
     }
   ]
 }

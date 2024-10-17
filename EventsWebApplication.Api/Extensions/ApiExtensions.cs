@@ -3,7 +3,6 @@ using EventsWebApplication.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
-using System.Security;
 using System.Text;
 
 namespace EventsWebApplication.Api.Extensions
@@ -62,6 +61,7 @@ namespace EventsWebApplication.Api.Extensions
 
                 });
             });
+
         }
     }
 }

@@ -1,12 +1,9 @@
-﻿using EventsWebApplication.Core.Contracts;
-using EventsWebApplication.Application.Services;
-using EventsWebApplication.Core.Enums;
-using EventsWebApplication.Core.Models;
-using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
-using FluentValidation;
-using FluentValidation.Results;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using EventsWebApplication.Application.Members.UseCases.AddUserToEvent;
+using EventsWebApplication.Application.Members.UseCases.GetMemberByEvent;
+using EventsWebApplication.Application.Members.UseCases.DeleteMemberFromEvent;
+using EventsWebApplication.Application.Members.UseCases.GetMemberById;
 
 
 namespace EventsWebApplication.Api.Controllers
@@ -15,27 +12,26 @@ namespace EventsWebApplication.Api.Controllers
     [Route("api/[controller]")]
     public class MemberController:ControllerBase
     {
-        private readonly IMemberService _service;
-        private readonly IMapper _mapper;
-        private readonly IValidator<MemberRegistrationRequest> _validator;
-
-        public MemberController(IMemberService service,IMapper mapper,IValidator<MemberRegistrationRequest> validator)
+        private readonly AddUserToEventUseCase _addUserToEventUseCase;
+        private readonly GetMemberByEventUseCase _getMemberByEventUseCase;
+        private readonly GetMemberByIdUseCase _getMemberByIdUseCase;
+        private readonly DeleteMemberFromEventUseCase _deleteMemberFromEventUseCase;
+        public MemberController(AddUserToEventUseCase addUserToEventUseCase, 
+            GetMemberByEventUseCase getMemberByEventUseCase,
+            GetMemberByIdUseCase getEventByIdUseCase,
+            DeleteMemberFromEventUseCase deleteMemberFromEventUseCase)
         {
-            _service = service;
-            _mapper = mapper;
-            _validator = validator;
+            _addUserToEventUseCase = addUserToEventUseCase;
+            _getMemberByEventUseCase= getMemberByEventUseCase;
+            _getMemberByIdUseCase= getEventByIdUseCase;
+            _deleteMemberFromEventUseCase= deleteMemberFromEventUseCase;
         }
 
         [HttpPost("{eventId:guid}")]
         [Authorize(Policy = "User")]
-        public async Task<IActionResult> AddToEvent(Guid eventId, [FromBody] MemberRegistrationRequest request)
+        public async Task<IActionResult> AddToEvent([FromRoute] Guid eventId)
         {
-            ValidationResult validResult = await _validator.ValidateAsync(request);
-
-            if (!validResult.IsValid)
-            {
-                return BadRequest(validResult.Errors);
-            }
+           
             var userIdClaim = HttpContext.User.Claims.FirstOrDefault(claim => claim.Type == "userId");
 
             if (userIdClaim == null)
@@ -45,69 +41,36 @@ namespace EventsWebApplication.Api.Controllers
 
             var userId = Guid.Parse(userIdClaim.Value);
 
-            var result = await _service.AddToEvent(eventId, userId, request.surname, request.birthDate, DateOnly.FromDateTime(DateTime.Now));
+            await _addUserToEventUseCase.AddToEvent(new AddUserToEventRequest { EventId=eventId, UserId= userId, DateRegistration=DateOnly.FromDateTime(DateTime.Now)});
+            return Ok();
 
-            return result switch
-            {
-                AddToEventResult.Success => Ok("Member successfully added to the event."),
-                AddToEventResult.AlreadyExists => Conflict("Member already added to this event."),
-                AddToEventResult.EventNotFound => NotFound("Event not found."),
-                AddToEventResult.UserNotFound => NotFound("User not found."),
-                _ => StatusCode(500, "An unexpected error occurred.")
-            };
         }
 
 
         [HttpGet("GetByEvent{eventId:guid}")]
         [Authorize(Policy = "User")]
 
-        public async Task<ActionResult<List<MembersResponse>>> GetByEvent(Guid eventId)
+        public async Task<IActionResult> GetMembersByEvent(Guid eventId, [FromQuery] int pageNumber=1, [FromQuery] int pageSize=2 )
         {
-            try
-            {
-                var members = await _service.Get(eventId);
-                var response = _mapper.Map<List<MembersResponse>>(members);
-                return Ok(response);
-            }
-            catch (InvalidOperationException ex)
-            {
-
-                return NotFound(ex.Message);
-            } 
+            var members=await _getMemberByEventUseCase.GetByEvent(new GetMemberByEventRequest { EventId=eventId, PageNumber=pageNumber, PageSize=pageSize });
+            return Ok(members);
         }
 
 
         [HttpGet("GetById{memberId:guid}")]
         [Authorize(Policy = "User")]
-        public async Task<ActionResult<MembersResponse>> GetById(Guid memberId)
+        public async Task<IActionResult> GetMemberById(Guid memberId)
         {
-            try
-            {
-                var member = await _service.GetById(memberId);
-                var response=_mapper.Map<MembersResponse>(member);
-                return Ok(response);
-            }
-            catch (InvalidOperationException ex)
-            {
-                
-                return NotFound(ex.Message);
-            } 
+           var member=await _getMemberByIdUseCase.GetById(new GetMemberByIdRequest { Id=memberId });
+            return Ok(member);
         }
 
         [HttpDelete("{eventId:guid}/{memberId:guid}")]
         [Authorize(Policy = "Admin")]
         public async Task<IActionResult> DeleteMemberFromEvent(Guid eventId, Guid memberId)
         {
-            var result = await _service.DeleteMember(eventId, memberId);
-
-            return result switch
-            {
-                DeleteMemberResults.Success => Ok("Member successfully deleted from event"),
-                DeleteMemberResults.EventNotFound => NotFound("Event not found"),
-                DeleteMemberResults.MemberNotFound => NotFound("Member not found"),
-                DeleteMemberResults.MemberNotInEvent => BadRequest("Member is not part of this event"),
-                _ => StatusCode(500, "An error occurred while processing your request")
-            };
+            await _deleteMemberFromEventUseCase.Delete(new DeleteMemberFromEventRequest { EventId=eventId, UserId= memberId });
+            return Ok();
         }
 
     }

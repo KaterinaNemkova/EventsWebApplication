@@ -1,14 +1,16 @@
-﻿using EventsWebApplication.Core.Entities;
+﻿using EventsWebApplication.Core.Abstractions;
+using EventsWebApplication.Core.Entities;
 using EventsWebApplication.Core.Enums;
-using EventsWebApplication.Core.Models;
+
 
 namespace EventsWebApplication.DataAccess.Repositories
 {
-    public interface IUserRepository
+    public interface IUserRepository: IRepository<UserEntity>
     {
-        Task Add(User user);
+        Task Create(UserEntity user);
         Task<bool> AlreadyExist(Guid userId);
         Task<UserEntity?> GetByEmail(string email);
         Task<HashSet<Permission>> GetUserPermissions(Guid UserId);
+     
     }
 }

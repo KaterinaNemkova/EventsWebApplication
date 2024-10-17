@@ -1,8 +1,7 @@
 ﻿namespace EventsWebApplication.Core.Entities
 {
-    public class MemberEntity
+    public class MemberEntity:Entity
     {
-        public Guid Id { get; set; }
 
         public string Name { get; set; }=string.Empty;
 

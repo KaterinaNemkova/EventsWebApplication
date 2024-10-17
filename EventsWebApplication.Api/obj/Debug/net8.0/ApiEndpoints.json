@@ -1,23 +1,40 @@
 [
   {
     "ContainingType": "EventsWebApplication.Api.Controllers.EventsController",
-    "Method": "GetEvents",
+    "Method": "GetAllEvents",
     "RelativePath": "api/Events",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
+    "Parameters": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[EventsWebApplication.Core.Contracts.EventsResponse, EventsWebApplication.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
-    ]
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EventsWebApplication.Api.Controllers.EventsController",
+    "Method": "UpdateEvent",
+    "RelativePath": "api/Events",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "EventsWebApplication.Application.Events.UseCases.UpdateEvent.UpdateEventRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "EventsWebApplication.Api.Controllers.EventsController",
@@ -27,37 +44,6 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "EventsWebApplication.Core.Contracts.EventsResponse",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "EventsWebApplication.Api.Controllers.EventsController",
-    "Method": "UpdateEvent",
-    "RelativePath": "api/Events/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "EventsWebApplication.Core.Contracts.EventsRequest",
-        "IsRequired": true
-      },
       {
         "Name": "id",
         "Type": "System.Guid",
@@ -77,11 +63,6 @@
       {
         "Name": "id",
         "Type": "System.Guid",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
         "IsRequired": true
       }
     ],
@@ -101,17 +82,7 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "EventsWebApplication.Core.Contracts.EventsResponse",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "EventsWebApplication.Api.Controllers.EventsController",
@@ -123,21 +94,11 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "EventsWebApplication.Core.Contracts.EventsRequest",
+        "Type": "EventsWebApplication.Application.Events.UseCases.CreateEvent.CreateEventRequest",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "EventsWebApplication.Core.Contracts.EventsResponse",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "EventsWebApplication.Api.Controllers.EventsController",
@@ -161,19 +122,19 @@
         "Name": "eventsCategory",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[EventsWebApplication.Core.Contracts.EventsResponse, EventsWebApplication.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "EventsWebApplication.Api.Controllers.EventsController",
@@ -208,11 +169,6 @@
         "Name": "eventId",
         "Type": "System.Guid",
         "IsRequired": true
-      },
-      {
-        "Name": "request",
-        "Type": "EventsWebApplication.Core.Contracts.MemberRegistrationRequest",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -240,7 +196,7 @@
   },
   {
     "ContainingType": "EventsWebApplication.Api.Controllers.MemberController",
-    "Method": "GetByEvent",
+    "Method": "GetMembersByEvent",
     "RelativePath": "api/Member/GetByEvent{eventId}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -250,23 +206,23 @@
         "Name": "eventId",
         "Type": "System.Guid",
         "IsRequired": true
+      },
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[EventsWebApplication.Core.Contracts.MembersResponse, EventsWebApplication.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "EventsWebApplication.Api.Controllers.MemberController",
-    "Method": "GetById",
+    "Method": "GetMemberById",
     "RelativePath": "api/Member/GetById{memberId}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -278,17 +234,7 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "EventsWebApplication.Core.Contracts.MembersResponse",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "EventsWebApplication.Api.Controllers.UserController",
@@ -300,7 +246,23 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "EventsWebApplication.Core.Contracts.LoginUserRequest",
+        "Type": "EventsWebApplication.Application.Users.Login.UserLoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EventsWebApplication.Api.Controllers.UserController",
+    "Method": "Refresh",
+    "RelativePath": "User/refresh /{refreshToken}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "refreshToken",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -316,7 +278,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "EventsWebApplication.Core.Contracts.RegisterUserRequest",
+        "Type": "EventsWebApplication.Application.Users.Registration.UserRegistrationRequest",
         "IsRequired": true
       }
     ],

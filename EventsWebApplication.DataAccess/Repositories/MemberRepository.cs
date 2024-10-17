@@ -1,15 +1,14 @@
-﻿using EventsWebApplication.Core.Models;
-using EventsWebApplication.Core.Entities;
+﻿using EventsWebApplication.Core.Entities;
 using Microsoft.EntityFrameworkCore;
-using AutoMapper;
+
 
 namespace EventsWebApplication.DataAccess.Repositories
 {
-    public class MemberRepository(EventsApplicationDbContext context) : IMemberRepository
+    public class MemberRepository : Repository<MemberEntity>, IMemberRepository
     {
-        private readonly EventsApplicationDbContext _context = context;
+        public MemberRepository(EventsApplicationDbContext context) : base(context) { }
 
-        public async Task<bool> Add(Guid eventId, Guid userId, string surname, DateOnly birthDate, DateOnly registrDate)
+        public async Task<bool> AddAsync(Guid eventId, Guid userId,DateOnly registrDate )
         {
             var eventEntity = await _context.Events
                 .Include(e => e.Members)
@@ -21,9 +20,9 @@ namespace EventsWebApplication.DataAccess.Repositories
             var memberEntity = new MemberEntity
             {
                 Id = userEntity.Id,
-                Name = userEntity.UserName,
-                Surname = surname,
-                BirthDate = birthDate,
+                Name = userEntity.Name,
+                Surname = userEntity.Surname,
+                BirthDate = userEntity.BirthDate,
                 RegistrationDate = registrDate,
                 Email = userEntity.Email,
             };
@@ -33,15 +32,13 @@ namespace EventsWebApplication.DataAccess.Repositories
             if (!eventEntity.Members.Contains(memberEntity))
             {
                 eventEntity.Members.Add(memberEntity);
-                await _context.SaveChangesAsync();
                 return true;
             }
 
             return false;
         }
 
-
-        public async Task<List<MemberEntity>> Get(Guid eventId)
+        public async Task<List<MemberEntity>> GetByEventAsync(Guid eventId)
         {
             var memberEntities = await _context.Events
                 .AsNoTracking()  
@@ -52,34 +49,18 @@ namespace EventsWebApplication.DataAccess.Repositories
             return memberEntities;
         }
 
-        public async Task<MemberEntity?> GetById(Guid id)
-        {
-            var memberEntity = await _context.Members
-                .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            return memberEntity;
-        }
-
-
         public async Task<bool> Delete(Guid eventId, Guid memberId)
         {
-           
             var eventEntity = await _context.Events
-                .Include(e => e.Members)
+                .Include(m=>m.Members)
                 .FirstAsync(e => e.Id == eventId);
 
             var memberEntity = eventEntity.Members
-                .FirstOrDefault(m => m.Id == memberId);
-
-            if (memberEntity == null)
-            {
-                return false; 
-            }
+                .First(m => m.Id == memberId);
 
             eventEntity.Members.Remove(memberEntity);
-            await _context.SaveChangesAsync();
-
+            _context.Members.Remove(memberEntity);
+            
             return true;
         }
 

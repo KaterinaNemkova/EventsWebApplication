@@ -1,48 +1,69 @@
 ﻿using EventsWebApplication.Core.Entities;
 using EventsWebApplication.Core.Enums;
-using EventsWebApplication.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 
 
 namespace EventsWebApplication.DataAccess.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : Repository<UserEntity>, IUserRepository
     {
-        private readonly EventsApplicationDbContext _context;
-
-        public UserRepository(EventsApplicationDbContext context)
-        {
-            _context = context;
-        }
-        public async Task Add(User user)
+        public UserRepository(EventsApplicationDbContext context) : base(context) { }
+        public async Task Create(UserEntity entity)
         {
             var roleEntity = await _context.Roles
-                .SingleOrDefaultAsync(r => r.Id == (int)Role.User)
+                .SingleOrDefaultAsync(r => r.Id == (int)Role.Admin)
                 ?? throw new Exception();
 
             var userEntity = new UserEntity()
             {
-                Id = user.Id,
-                UserName = user.UserName,
-                Email = user.Email,
-                PasswordHash = user.PasswordHash,
+                Id = Guid.NewGuid(),
+                Name = entity.Name,
+                Surname=entity.Surname,
+                BirthDate= entity.BirthDate,
+                Email = entity.Email,
+                PasswordHash = entity.PasswordHash,
+                RefreshToken= entity.RefreshToken,
+                RefreshTokenExpireHours= entity.RefreshTokenExpireHours,
                 Roles = { roleEntity }
-
             };
 
             await _context.Users.AddAsync(userEntity);
-            await _context.SaveChangesAsync();
         }
+
+        //public async Task Update(UserEntity entity)
+        //{
+        //    var existingUser = await _context.Users
+        //        .Include(u => u.Roles)
+        //        .SingleOrDefaultAsync(u => u.Id == entity.Id)
+        //        ?? throw new Exception("User not found.");
+
+        //    existingUser.Name = entity.Name;
+        //    existingUser.Surname = entity.Surname;
+        //    existingUser.BirthDate = entity.BirthDate;
+        //    existingUser.Email = entity.Email;
+        //    existingUser.PasswordHash = entity.PasswordHash;
+        //    existingUser.RefreshToken = entity.RefreshToken;
+        //    existingUser.RefreshTokenExpireHours = entity.RefreshTokenExpireHours;
+
+        //    if (entity.Roles != null && entity.Roles.Any())
+        //    {
+        //        existingUser.Roles.Clear();
+        //        foreach (var role in entity.Roles)
+        //        {
+        //            existingUser.Roles.Add(role);
+        //        }
+        //    }
+        //}
 
         public async Task<UserEntity?> GetByEmail(string email)
         {
-            var userEntity = await _context.Users
+            return await _context.Users
                 .AsNoTracking()
                 .FirstOrDefaultAsync(u => u.Email == email);
-
-            return userEntity;
         }
+
+
 
         public async Task<HashSet<Permission>> GetUserPermissions(Guid UserId)
         {
@@ -61,7 +82,7 @@ namespace EventsWebApplication.DataAccess.Repositories
                 .ToHashSet();
         }
 
-        public async Task<bool> AlreadyExist(Guid userId)
+        public async Task<bool> AlreadyExist(Guid userId )
         {
             var userExist = await _context.Users.AnyAsync(x => x.Id == userId);
 

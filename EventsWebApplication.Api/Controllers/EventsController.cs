@@ -1,12 +1,17 @@
-﻿using EventsWebApplication.Core.Contracts;
-using EventsWebApplication.Application.Services;
-using EventsWebApplication.Core.Enums;
-using EventsWebApplication.Core.Models;
+﻿using EventsWebApplication.Core.Enums;
 using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
-using FluentValidation;
-using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
+using EventsWebApplication.Application.Events.UseCases.CreateEvent;
+using EventsWebApplication.Application.Events.Services.GetAllEvents;
+using EventsWebApplication.Application.Events.UseCases.GetAllEvents;
+using EventsWebApplication.Application.Events.UseCases.GetEventById;
+using EventsWebApplication.Application.Events.UseCases.GetEventByName;
+using EventsWebApplication.Application.Events.UseCases.GetEventsByFilter;
+using EventsWebApplication.Application.Events.UseCases.GetEventByFilter;
+using EventsWebApplication.Application.Events.UseCases.UpdateEvent;
+using EventsWebApplication.Application.Events.UseCases.UploadImage;
+using EventsWebApplication.Application.Events.UseCases.DeleteEvent;
+
 
 namespace EventsWebApplication.Api.Controllers
 {
@@ -17,169 +22,100 @@ namespace EventsWebApplication.Api.Controllers
     
     public class EventsController:ControllerBase
     {
-        private readonly IEventService _eventService;
-        private readonly IMapper _mapper;
-        private readonly IValidator<EventsRequest> _validator;
-
-        public EventsController(IEventService eventService,IMapper mapper, IValidator<EventsRequest> validator)
+        private readonly CreateEventUseCase _createEventUseCase;
+        private readonly GetAllEventsUseCase _getAllEventsUseCase;
+        private readonly GetEventByIdUseCase _getEventByIdUseCase;
+        private readonly GetEventByNameUseCase _getEventByNameUseCase;
+        private readonly GetEventsByFilterUseCase _getEventsByFilterUseCase;
+        private readonly UpdateEventUseCase _updateEventUseCase;
+        private readonly UploadImageUseCase _uploadImageUseCase;
+        private readonly DeleteEventUseCase _deleteEventUseCase;
+        public EventsController(CreateEventUseCase createEventUseCase, 
+            GetAllEventsUseCase getAllEventsUseCase, GetEventByIdUseCase getEventByIdUseCase, 
+            GetEventByNameUseCase getEventByNameUseCase, GetEventsByFilterUseCase getEventsByFilterUseCase, 
+            UpdateEventUseCase updateEventUseCase, DeleteEventUseCase deleteEventUseCase, UploadImageUseCase uploadImageUseCase)
         {
-            _eventService = eventService;
-            _mapper = mapper;
-            _validator = validator;
+           _createEventUseCase = createEventUseCase;
+            _getAllEventsUseCase= getAllEventsUseCase;
+            _getEventByIdUseCase= getEventByIdUseCase;
+            _getEventByNameUseCase= getEventByNameUseCase;
+            _getEventsByFilterUseCase= getEventsByFilterUseCase;
+            _updateEventUseCase= updateEventUseCase;
+            _deleteEventUseCase= deleteEventUseCase;
+            _uploadImageUseCase= uploadImageUseCase;
         }
 
 
         [HttpGet]
-        [Authorize(Policy = "User")]
-        public async Task<ActionResult<List<EventsResponse>>> GetEvents()
+        [Authorize(Policy = "Admin")]
+        public async Task<IActionResult> GetAllEvents([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 2)
         {
-            try
-            {
-                var events = await _eventService.GetEvents();
-                var response = _mapper.Map<List<EventsResponse>>(events);
-                return Ok(response);
-            }
-            catch (InvalidOperationException ex)
-            {
-                
-                return NotFound(ex.Message);
-            }
+            var events = await _getAllEventsUseCase.GetAll(new GetAllEventsRequest { PageNumber = pageNumber, PageSize = pageSize });
+            return Ok(events);
         }
 
         [HttpGet("{id:guid}")]
         [Authorize(Policy = "User")]
-        public async Task<ActionResult<EventsResponse>> GetById(Guid id)
+        public async Task<IActionResult> GetById([FromRoute]Guid id)
         {
-            try
-            {
-                var eventModel = await _eventService.GetById(id);
-                var response = _mapper.Map<EventsResponse>(eventModel);
-                return Ok(response);
-            }
-            catch (InvalidOperationException ex)
-            {
-                return NotFound(ex.Message);
-            }
-            
+           var _event=await _getEventByIdUseCase.GetById(new GetEventByIdRequest { Id=id});     
+            return Ok(_event);
+
         }
 
         [HttpGet("{title}")]
         [Authorize(Policy = "User")]
-        public async Task<ActionResult<EventsResponse>> GetByName(string title)
+        public async Task<IActionResult> GetByName(string title)
         {
-            try
-            {
-                var eventModel = await _eventService.GetByName(title);
-                var response = _mapper.Map<EventsResponse>(eventModel);
-                return Ok(response);
-            }
-            catch (InvalidOperationException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var _event = await _getEventByNameUseCase.GetByName(new GetEventByNameRequest { Name = title });
+            return Ok(_event);
         }
 
         [HttpGet("filter")]
         [Authorize(Policy = "User")]
-        public async Task<ActionResult<List<EventsResponse>>> GetByFilter(
+        public async Task<IActionResult> GetByFilter(
             [FromQuery] DateTime? eventDate,
             [FromQuery] string? place,
-            [FromQuery] EventsCategory? eventsCategory)
+            [FromQuery] EventsCategory? eventsCategory, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 2)
         {
-            try 
-            {
-                var events = await _eventService.GetByFilter(eventDate, place, eventsCategory);
-                var response = _mapper.Map<List<EventsResponse>>(events);
-                return Ok(response);
-            }
-            catch(InvalidOperationException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var events = await _getEventsByFilterUseCase.GetByFilter(new GetEventsByFilterRequest { DateTime = eventDate, Place = place, 
+                EventsCategory = eventsCategory,
+                PageNumber = pageNumber, PageSize = pageSize });
+            return Ok(events);
         }
 
 
         [HttpPost("create-event")]
         [Authorize(Policy = "Admin")]
-        public async Task<ActionResult<EventsResponse>> CreateEvent([FromBody] EventsRequest request)
+        public async Task<IActionResult> CreateEvent([FromBody] CreateEventRequest request)
         {
-            ValidationResult result = await _validator.ValidateAsync(request);
 
-            if (!result.IsValid)
-            {
-                return BadRequest(result.Errors);
-            }
-            var eventModel = new Event {
-                    Id=Guid.NewGuid(),
-                    Title=request.title,
-                    Description=request.description,
-                    DateTime=request.dateTime,
-                    Place=request.place,
-                    EventCategory=request.eventsCategory,
-                    MaxCountPeople=request.maxCountPeople
-                    };
-            await _eventService.CreateEvent(eventModel);
-            var response=_mapper.Map<EventsResponse>(eventModel);
-            return Ok(response);
+            await _createEventUseCase.Create(request);
+            return Ok();
+            
         }
 
-        [HttpPut("{id:guid}")]
+        [HttpPut]
         [Authorize(Policy = "Admin")]
-        public async Task<IActionResult> UpdateEvent([FromBody] EventsRequest request,Guid id)
+        public async Task<IActionResult> UpdateEvent([FromBody] UpdateEventRequest request)
         {
-            ValidationResult result = await _validator.ValidateAsync(request);
-
-            if (!result.IsValid)
-            {
-                return BadRequest(result.Errors); 
-            }
-            try
-            {
-                await _eventService.Update(id, request);
-                return Ok("Event succesfully updated");
-            }
-            catch (InvalidOperationException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            await _updateEventUseCase.Update(request);
+            return Ok();
         }
         [HttpPost("upload-image/{eventId}")]
         [Authorize(Policy = "Admin")]
         public async Task<IActionResult> UploadImage(Guid eventId, IFormFile file)
         {
-            try
-            {
-                if (file == null || file.Length == 0)
-                {
-                    return BadRequest("Invalid file.");
-                }
-
-                await _eventService.UploadImage(eventId, file);
-                return Ok("Image succesfully added");
-            }
-
-            catch(InvalidOperationException ex) 
-            {
-                return NotFound(ex.Message);
-            }
+           await _uploadImageUseCase.UploadImage(new UploadImageRequest { Id=eventId, File=file});
+            return Ok();
         }
 
         [HttpDelete("{id:guid}")]
         [Authorize(Policy = "Admin")]
-        public async Task<IActionResult> DeleteEvent([FromQuery] Guid id)
+        public async Task<IActionResult> DeleteEvent([FromRoute] Guid id)
         {
-            try
-            {
-                await _eventService.Delete(id);
-                return Ok($"Event with id {id} is deleted");
-            }
-            catch (InvalidOperationException ex)
-            {
-                return NotFound(ex.Message);
-            }
-            
-
-           
+           await _deleteEventUseCase.Delete(new DeleteEventRequest { Id = id });
+            return Ok();
         }
 
     }

@@ -33,11 +33,12 @@ namespace EventsWebApplication.Tests
 
             var eventEntity = new EventEntity { Id = eventId, Members = new List<MemberEntity>() };
             var userEntity = new UserEntity { Id = userId, UserName = "JohnDoe", Email = "johndoe@example.com" };
-
+            
             _context.Events.Add(eventEntity);
             _context.Users.Add(userEntity);
-            await _context.SaveChangesAsync();
 
+            await _context.SaveChangesAsync();
+            
             // Act
             var result = await _memberRepository.Add(eventId, userId, surname, birthDate, registrDate);
 
