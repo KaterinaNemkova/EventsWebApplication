@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EventsWebApplication.Application.DTOs;
 using EventsWebApplication.Application.Events.UseCases.GetEventByFilter;
+using EventsWebApplication.Core.Abstractions;
 using EventsWebApplication.Core.Entities;
 using EventsWebApplication.DataAccess.Repositories;
 using EventsWebApplication.DataAccess.UnitOfWork;
@@ -13,9 +14,9 @@ namespace EventsWebApplication.Application.Events.UseCases.GetEventsByFilter
         private readonly IEventRepository _eventRepository;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ValidationService _validationService;
+        private readonly IValidationService _validationService;
 
-        public GetEventsByFilterUseCase(IUnitOfWork unitOfWork, IMapper mapper, ValidationService validationService)
+        public GetEventsByFilterUseCase(IUnitOfWork unitOfWork, IMapper mapper, IValidationService validationService)
         {
             _unitOfWork = unitOfWork;
             _eventRepository = _unitOfWork.eventRepository;
@@ -40,7 +41,7 @@ namespace EventsWebApplication.Application.Events.UseCases.GetEventsByFilter
                 eventEntities = eventEntities.Where(x => x.EventCategory == request.EventsCategory.Value).ToList();
             }
 
-            if (eventEntities == null)
+            if (eventEntities == null || !eventEntities.Any())
             {
                 throw new KeyNotFoundException("No events found for the given filters.");
             }

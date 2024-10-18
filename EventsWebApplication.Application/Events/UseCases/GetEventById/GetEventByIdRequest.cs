@@ -1,5 +1,5 @@
-﻿using EventsWebApplication.Application.DTOs;
-using MediatR;
+﻿
+
 
 
 namespace EventsWebApplication.Application.Events.UseCases.GetEventById

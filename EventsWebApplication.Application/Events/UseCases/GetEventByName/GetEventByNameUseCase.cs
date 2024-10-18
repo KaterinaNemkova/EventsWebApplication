@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EventsWebApplication.Application.DTOs;
+using EventsWebApplication.Core.Abstractions;
 using EventsWebApplication.DataAccess.Repositories;
 using EventsWebApplication.DataAccess.UnitOfWork;
 
@@ -10,9 +11,9 @@ namespace EventsWebApplication.Application.Events.UseCases.GetEventByName
         private readonly IEventRepository _eventRepository;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ValidationService _validationService;
+        private readonly IValidationService _validationService;
 
-        public GetEventByNameUseCase(IUnitOfWork unitOfWork, IMapper mapper, ValidationService validationService)
+        public GetEventByNameUseCase(IUnitOfWork unitOfWork, IMapper mapper, IValidationService validationService)
         {
             _unitOfWork = unitOfWork;
             _eventRepository = _unitOfWork.eventRepository;

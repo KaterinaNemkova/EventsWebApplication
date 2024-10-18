@@ -9,7 +9,7 @@ namespace EventsWebApplication.Application.Events.UseCases.UpdateEvent
         public required string Description { get; set; }
         public required DateTime DateTime { get; set; }
         public required string Place { get; set; }
-        public required EventsCategory EventsCategory { get; set; }
+        public required EventsCategory EventCategory { get; set; }
         public required int MaxCountPeople { get; set; }
     };
 }

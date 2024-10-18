@@ -123,5 +123,3 @@ D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Infrastructure\
 D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Infrastructure\bin\Debug\net8.0\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
 D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Infrastructure\obj\Debug\net8.0\EventsWebApplication.Infrastructure.genruntimeconfig.cache
 D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Infrastructure\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll
-D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Infrastructure\bin\Debug\net8.0\MediatR.dll
-D:\ProjectsCиШарп\EventsWebApplication\EventsWebApplication.Infrastructure\bin\Debug\net8.0\MediatR.Contracts.dll

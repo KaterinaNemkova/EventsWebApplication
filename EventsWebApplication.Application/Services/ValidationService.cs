@@ -1,7 +1,8 @@
-﻿using FluentValidation;
+﻿using EventsWebApplication.Core.Abstractions;
+using FluentValidation;
 using FluentValidation.Results;
 
-public class ValidationService
+public class ValidationService:IValidationService
 {
     private readonly IEnumerable<IValidator> _validators;
 
@@ -16,8 +17,8 @@ public class ValidationService
 
         if (!validators.Any())
         {
-            Console.WriteLine($"No validators found for type: {typeof(T).Name}"); // Для отладки
-            return; // Здесь вы возвращаете, если валидаторов не найдено
+            Console.WriteLine($"No validators found for type: {typeof(T).Name}");
+            return; 
         }
 
         var validationFailures = new List<ValidationFailure>();

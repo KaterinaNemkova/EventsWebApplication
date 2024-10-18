@@ -1,4 +1,5 @@
-﻿using EventsWebApplication.Core.Entities;
+﻿using EventsWebApplication.Core.Abstractions;
+using EventsWebApplication.Core.Entities;
 using EventsWebApplication.DataAccess.Repositories;
 using EventsWebApplication.DataAccess.UnitOfWork;
 
@@ -9,10 +10,10 @@ namespace EventsWebApplication.Application.Events.UseCases.DeleteEvent
     {
         private readonly IEventRepository _eventRepository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ValidationService _validationService;
+        private readonly IValidationService _validationService;
 
 
-        public DeleteEventUseCase(IUnitOfWork unitOfWork, ValidationService validationService)
+        public DeleteEventUseCase(IUnitOfWork unitOfWork, IValidationService validationService)
         {
             _unitOfWork = unitOfWork;
             _eventRepository = unitOfWork.eventRepository;

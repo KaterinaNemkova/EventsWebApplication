@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EventsWebApplication.Core.Abstractions;
 using EventsWebApplication.Core.Entities;
 using EventsWebApplication.DataAccess.Repositories;
 using EventsWebApplication.DataAccess.UnitOfWork;
@@ -10,9 +11,9 @@ namespace EventsWebApplication.Application.Events.UseCases.UpdateEvent
         private readonly IEventRepository _eventRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly ValidationService _validationService;
+        private readonly IValidationService _validationService;
 
-        public UpdateEventUseCase(IUnitOfWork unitOfWork, IMapper mapper, ValidationService validationService)
+        public UpdateEventUseCase(IUnitOfWork unitOfWork, IMapper mapper, IValidationService validationService)
         {
             _unitOfWork = unitOfWork;
             _eventRepository = _unitOfWork.eventRepository;
@@ -28,7 +29,7 @@ namespace EventsWebApplication.Application.Events.UseCases.UpdateEvent
 
             var eventObject = await _eventRepository.GetByIdAsync(entity.Id);
 
-            if (eventObject is not null)
+            if (eventObject is null)
                 throw new KeyNotFoundException($"Event with id {entity.Id} doesn't exist.");
             await _eventRepository.UpdateAsync(entity);
             await _unitOfWork.SaveChangesAsync();

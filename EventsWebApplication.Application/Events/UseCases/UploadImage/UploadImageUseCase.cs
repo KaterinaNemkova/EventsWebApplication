@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EventsWebApplication.Core;
+using EventsWebApplication.Core.Abstractions;
 using EventsWebApplication.DataAccess.Repositories;
 using EventsWebApplication.DataAccess.UnitOfWork;
 
@@ -11,9 +12,9 @@ namespace EventsWebApplication.Application.Events.UseCases.UploadImage
         private readonly IEventRepository _eventRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFileService _fileService;
-        private readonly ValidationService _validationService;
+        private readonly IValidationService _validationService;
 
-        public UploadImageUseCase (IUnitOfWork unitOfWork, IMapper mapper,IFileService fileService, ValidationService validationService)
+        public UploadImageUseCase (IUnitOfWork unitOfWork, IMapper mapper,IFileService fileService, IValidationService validationService)
         {
             _unitOfWork = unitOfWork;
             _eventRepository = _unitOfWork.eventRepository;
@@ -22,6 +23,10 @@ namespace EventsWebApplication.Application.Events.UseCases.UploadImage
         }
         public async Task UploadImage(UploadImageRequest request)
         {
+            if (request.File == null)
+            {
+                throw new ArgumentNullException(nameof(request.File), "The uploaded file cannot be null.");
+            }
             await _validationService.ValidateAsync(request);
             var eventEntity = await _eventRepository.GetByIdAsync(request.Id);
             if (eventEntity == null)
@@ -34,10 +39,7 @@ namespace EventsWebApplication.Application.Events.UseCases.UploadImage
                 _fileService.DeleteFile(oldFilePath); 
             }
             
-            if (request.File == null)
-            {
-                throw new ArgumentNullException(nameof(request.File), "The uploaded file cannot be null.");
-            }
+            
 
             var fileName = await _fileService.SaveFileAsync(request.File, "wwwroot/images");
 

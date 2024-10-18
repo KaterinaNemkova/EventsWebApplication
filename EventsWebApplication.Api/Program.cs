@@ -68,6 +68,7 @@ builder.Services.AddScoped<IJwtProvider, JwtProvider>();
 builder.Services.AddScoped<IPermissionService, PermissionService>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IValidationService, ValidationService>();
 
 builder.Services.AddScoped<IValidator, CreateEventRequestValidator>();
 builder.Services.AddScoped<IValidator, UpdateEventRequestValidator>();
@@ -81,8 +82,8 @@ builder.Services.AddScoped<IValidator, UploadImageRequestValidator>();
 builder.Services.AddScoped<IValidator, UserLoginRequestValidator>();
 builder.Services.AddScoped<IValidator, UserRegistrationRequestValidator>();
 builder.Services.AddScoped<IValidator, RefreshTokenRequestValidator>();
-builder.Services.AddScoped<ValidationService>();
 
+builder.Services.AddScoped<ValidationService>();
 builder.Services.AddScoped<UserRegistrationUseCase>();
 builder.Services.AddScoped<UserLoginUseCase>();
 builder.Services.AddScoped<RefreshTokenUseCase>();

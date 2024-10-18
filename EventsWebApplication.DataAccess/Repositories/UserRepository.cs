@@ -31,30 +31,6 @@ namespace EventsWebApplication.DataAccess.Repositories
             await _context.Users.AddAsync(userEntity);
         }
 
-        //public async Task Update(UserEntity entity)
-        //{
-        //    var existingUser = await _context.Users
-        //        .Include(u => u.Roles)
-        //        .SingleOrDefaultAsync(u => u.Id == entity.Id)
-        //        ?? throw new Exception("User not found.");
-
-        //    existingUser.Name = entity.Name;
-        //    existingUser.Surname = entity.Surname;
-        //    existingUser.BirthDate = entity.BirthDate;
-        //    existingUser.Email = entity.Email;
-        //    existingUser.PasswordHash = entity.PasswordHash;
-        //    existingUser.RefreshToken = entity.RefreshToken;
-        //    existingUser.RefreshTokenExpireHours = entity.RefreshTokenExpireHours;
-
-        //    if (entity.Roles != null && entity.Roles.Any())
-        //    {
-        //        existingUser.Roles.Clear();
-        //        foreach (var role in entity.Roles)
-        //        {
-        //            existingUser.Roles.Add(role);
-        //        }
-        //    }
-        //}
 
         public async Task<UserEntity?> GetByEmail(string email)
         {

@@ -71,6 +71,10 @@
               "target": "Package",
               "version": "[4.0.3, )"
             },
+            "FluentAssertions": {
+              "target": "Package",
+              "version": "[6.12.1, )"
+            },
             "FluentValidation": {
               "target": "Package",
               "version": "[11.10.0, )"
