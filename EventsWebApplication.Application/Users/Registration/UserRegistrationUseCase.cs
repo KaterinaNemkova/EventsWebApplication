@@ -10,17 +10,15 @@ namespace EventsWebApplication.Application.Users.Registration
     {
         private readonly IUserRepository _repository;
         private readonly IPasswordHasher _hasher;
-        private readonly IJwtProvider _jwtProvider;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ValidationService _validationService;
 
-        public UserRegistrationUseCase(IPasswordHasher hasher, IJwtProvider jwtProvider,IMapper mapper, IUnitOfWork unitOfWork, ValidationService validationService)
+        public UserRegistrationUseCase(IPasswordHasher hasher,IMapper mapper, IUnitOfWork unitOfWork, ValidationService validationService)
         {
             _unitOfWork = unitOfWork;
             _repository = _unitOfWork.userRepository;
             _hasher = hasher;
-            _jwtProvider = jwtProvider;
             _mapper = mapper;
             _validationService = validationService;
 
@@ -32,20 +30,15 @@ namespace EventsWebApplication.Application.Users.Registration
             
 
             var hashedPassword = _hasher.Generate(request.Password);
-            var jwtToken = _jwtProvider.GenerateToken(user);
-            var refreshToken = _jwtProvider.GenerateRefreshToken();
-
+           
             user.PasswordHash = hashedPassword;
-            user.RefreshToken = refreshToken;
-            user.RefreshTokenExpireHours= DateTime.UtcNow.AddHours(5);
-
+           
             await _repository.Create(user);
             await _unitOfWork.SaveChangesAsync();
 
             return new UserRegistrationResponse
             {
-                JwtToken = jwtToken,
-                RefreshToken = refreshToken
+                UserId = user.Id
             };
 
         }

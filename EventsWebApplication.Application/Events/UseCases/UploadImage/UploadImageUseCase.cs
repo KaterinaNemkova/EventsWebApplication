@@ -14,7 +14,7 @@ namespace EventsWebApplication.Application.Events.UseCases.UploadImage
         private readonly IFileService _fileService;
         private readonly IValidationService _validationService;
 
-        public UploadImageUseCase (IUnitOfWork unitOfWork, IMapper mapper,IFileService fileService, IValidationService validationService)
+        public UploadImageUseCase (IUnitOfWork unitOfWork,IFileService fileService, IValidationService validationService)
         {
             _unitOfWork = unitOfWork;
             _eventRepository = _unitOfWork.eventRepository;

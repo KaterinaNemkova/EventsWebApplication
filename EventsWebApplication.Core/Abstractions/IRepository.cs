@@ -6,7 +6,7 @@ namespace EventsWebApplication.Core.Abstractions
     {
         Task CreateAsync(T entity);
         Task Delete(T entity);
-        Task<List<T>> GetAllAsync();
+        Task<List<T>> GetAllAsync(int pageNumber, int pageSize);
         Task<T?> GetByIdAsync(Guid id);
         Task UpdateAsync(T entity);
     }

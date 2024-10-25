@@ -255,7 +255,7 @@
   {
     "ContainingType": "EventsWebApplication.Api.Controllers.UserController",
     "Method": "Refresh",
-    "RelativePath": "User/refresh /{refreshToken}",
+    "RelativePath": "User/refresh",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

@@ -26,7 +26,7 @@ namespace EventsWebApplication.Application.Events.UseCases.GetEventsByFilter
         public async Task<PaginatedResult<EventDto>> GetByFilter(GetEventsByFilterRequest request)
         {
             await _validationService.ValidateAsync(request);
-            List<EventEntity> eventEntities = await _eventRepository.GetAllAsync();
+            List<EventEntity> eventEntities = await _eventRepository.GetAllAsync(request.PageNumber, request.PageSize);
 
             if (!string.IsNullOrEmpty(request.Place))
             {
@@ -45,17 +45,13 @@ namespace EventsWebApplication.Application.Events.UseCases.GetEventsByFilter
             {
                 throw new KeyNotFoundException("No events found for the given filters.");
             }
-            var pagedItems = eventEntities
-                .Skip((request.PageNumber - 1) * request.PageSize)
-                .Take(request.PageSize)
-                .ToList();
 
-            var eventsDto = _mapper.Map<List<EventDto>>(pagedItems);
-
+            var eventsDto = _mapper.Map<List<EventDto>>(eventEntities);
+            var totalCount = await _eventRepository.GetTotalCountAsync();
             return new PaginatedResult<EventDto>
             {
                 Items = eventsDto,
-                TotalCount = eventEntities.Count,
+                TotalCount = totalCount,
                 PageSize = request.PageSize,
                 PageNumber = request.PageNumber
             };

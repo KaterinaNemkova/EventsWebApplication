@@ -56,7 +56,7 @@ namespace EventsWebApplication.Tests.EventsUseCases
         };
 
             _validationServiceMock.Setup(v => v.ValidateAsync(request)).Returns(Task.CompletedTask);
-            _eventRepositoryMock.Setup(r => r.GetAllAsync()).ReturnsAsync(eventEntities);
+            _eventRepositoryMock.Setup(r => r.GetAllAsync(request.PageNumber, request.PageSize)).ReturnsAsync(eventEntities);
             _mapperMock.Setup(m => m.Map<List<EventDto>>(It.IsAny<List<EventEntity>>()))
                 .Returns((List<EventEntity> entities) => entities.Select(e => new EventDto { Id = e.Id, Title = e.Title }).ToList());
 
@@ -68,7 +68,7 @@ namespace EventsWebApplication.Tests.EventsUseCases
             Assert.All(result.Items, item => Assert.Equal("New York", eventEntities.First(e => e.Id == item.Id).Place));
 
             _validationServiceMock.Verify(v => v.ValidateAsync(request), Times.Once);
-            _eventRepositoryMock.Verify(r => r.GetAllAsync(), Times.Once);
+            _eventRepositoryMock.Verify(r => r.GetAllAsync(request.PageNumber, request.PageSize), Times.Once);
             _mapperMock.Verify(m => m.Map<List<EventDto>>(It.IsAny<List<EventEntity>>()), Times.Once);
         }
 
@@ -91,7 +91,7 @@ namespace EventsWebApplication.Tests.EventsUseCases
         };
 
             _validationServiceMock.Setup(v => v.ValidateAsync(request)).Returns(Task.CompletedTask);
-            _eventRepositoryMock.Setup(r => r.GetAllAsync()).ReturnsAsync(eventEntities);
+            _eventRepositoryMock.Setup(r => r.GetAllAsync(request.PageNumber, request.PageSize)).ReturnsAsync(eventEntities);
             _mapperMock.Setup(m => m.Map<List<EventDto>>(It.IsAny<List<EventEntity>>()))
                 .Returns((List<EventEntity> entities) => entities.Select(e => new EventDto { Id = e.Id, Title = e.Title }).ToList());
 
@@ -102,7 +102,7 @@ namespace EventsWebApplication.Tests.EventsUseCases
             Assert.Equal(new DateTime(2024, 10, 18), eventEntities.First(e => e.Id == result.Items.First().Id).DateTime);
 
             _validationServiceMock.Verify(v => v.ValidateAsync(request), Times.Once);
-            _eventRepositoryMock.Verify(r => r.GetAllAsync(), Times.Once);
+            _eventRepositoryMock.Verify(r => r.GetAllAsync(request.PageNumber, request.PageSize), Times.Once);
             _mapperMock.Verify(m => m.Map<List<EventDto>>(It.IsAny<List<EventEntity>>()), Times.Once);
         }
 
@@ -124,7 +124,7 @@ namespace EventsWebApplication.Tests.EventsUseCases
             new EventEntity { Id = Guid.NewGuid(), Place = "Los Angeles", Title = "Event 2", EventCategory=EventsCategory.Corporate }
             };
             _validationServiceMock.Setup(v => v.ValidateAsync(request)).Returns(Task.CompletedTask);
-            _eventRepositoryMock.Setup(r => r.GetAllAsync()).ReturnsAsync(eventEntities);
+            _eventRepositoryMock.Setup(r => r.GetAllAsync(request.PageNumber, request.PageSize)).ReturnsAsync(eventEntities);
             _mapperMock.Setup(m => m.Map<List<EventDto>>(It.IsAny<List<EventEntity>>()))
                 .Returns((List<EventEntity> entities) => entities.Select(e => new EventDto { Id = e.Id, Title = e.Title }).ToList());
 
@@ -134,7 +134,7 @@ namespace EventsWebApplication.Tests.EventsUseCases
             Assert.All(result.Items, item => Assert.Equal(EventsCategory.Corporate, eventEntities.First(e => e.Id == item.Id).EventCategory));
 
             _validationServiceMock.Verify(v => v.ValidateAsync(request), Times.Once);
-            _eventRepositoryMock.Verify(r => r.GetAllAsync(), Times.Once);
+            _eventRepositoryMock.Verify(r => r.GetAllAsync(request.PageNumber, request.PageSize), Times.Once);
             _mapperMock.Verify(m => m.Map<List<EventDto>>(It.IsAny<List<EventEntity>>()), Times.Once);
         }
 
@@ -157,12 +157,12 @@ namespace EventsWebApplication.Tests.EventsUseCases
         };
 
             _validationServiceMock.Setup(v => v.ValidateAsync(request)).Returns(Task.CompletedTask);
-            _eventRepositoryMock.Setup(r => r.GetAllAsync()).ReturnsAsync(eventEntities);
+            _eventRepositoryMock.Setup(r => r.GetAllAsync(request.PageNumber, request.PageSize)).ReturnsAsync(eventEntities);
 
             await Assert.ThrowsAsync<KeyNotFoundException>(() => _getEventsByFilterUseCase.GetByFilter(request));
 
             _validationServiceMock.Verify(v => v.ValidateAsync(request), Times.Once);
-            _eventRepositoryMock.Verify(r => r.GetAllAsync(), Times.Once);
+            _eventRepositoryMock.Verify(r => r.GetAllAsync(request.PageNumber, request.PageSize), Times.Once);
         }
     }
 }

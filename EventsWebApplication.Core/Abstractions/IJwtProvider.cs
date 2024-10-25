@@ -7,6 +7,6 @@ namespace EventsWebApplication.Infrastructure
     {
         string GenerateRefreshToken();
         string GenerateToken(UserEntity user);
-        ClaimsPrincipal? GetClaimsPrincipal(string token);
+        ClaimsPrincipal? GetClaimsPrincipal(string? token);
     }
 }

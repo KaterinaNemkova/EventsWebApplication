@@ -36,15 +36,14 @@ namespace EventsWebApplication.Application.Users.Login
 
             if (result == false)
             {
-                throw new Exception("Failed to login");
+                throw new InvalidOperationException("Failed to login");
             }
 
             var jwtToken = _jwtProvider.GenerateToken(user);
             var refreshToken = _jwtProvider.GenerateRefreshToken();
 
-            
             user.RefreshToken = refreshToken;
-            user.RefreshTokenExpireHours = DateTime.UtcNow.AddHours(5);
+            user.RefreshTokenExpireHours = DateTime.UtcNow.AddHours(12);
 
             await _repository.UpdateAsync(user);
             await _unitOfWork.SaveChangesAsync();

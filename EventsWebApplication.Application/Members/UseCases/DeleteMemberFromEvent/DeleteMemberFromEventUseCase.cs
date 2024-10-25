@@ -42,7 +42,7 @@ namespace EventsWebApplication.Application.Members.UseCases.DeleteMemberFromEven
 
             if (!isDeleted)
             {
-                throw new Exception("Something wrong");
+                throw new InvalidOperationException("Something wrong");
             }
 
             await _unitOfWork.SaveChangesAsync();

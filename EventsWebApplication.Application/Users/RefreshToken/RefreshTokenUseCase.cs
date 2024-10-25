@@ -30,28 +30,22 @@ namespace EventsWebApplication.Application.Users.RefreshToken
 
             if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out Guid userId))
             {
-                throw new Exception("Invalid data in token");
+                throw new InvalidOperationException("Invalid data in token");
             }
 
             UserEntity? user = await _repository.GetByIdAsync(userId) ?? throw new KeyNotFoundException("Invalid user from token");
-            if (user.RefreshToken == null ||
-                user.RefreshToken != request.RefreshToken ||
-                user.RefreshTokenExpireHours < DateTime.UtcNow)
+            if (user.RefreshToken != request.RefreshToken)
             {
-                user.RefreshToken = "";
-                user.RefreshTokenExpireHours = null;
-
-                await _repository.UpdateAsync(user);
-                await _unitOfWork.SaveChangesAsync();
-
-                throw new Exception("Refresh token is not valid");
+                throw new InvalidOperationException("Refresh token is not valid");
+            }
+            if (user.RefreshTokenExpireHours < DateTime.UtcNow)
+            {
+                string newRefreshToken = _jwtProvider.GenerateRefreshToken();
+                user.RefreshToken = newRefreshToken;
+                user.RefreshTokenExpireHours = DateTime.UtcNow.AddHours(12);
             }
 
             string newJwtToken = _jwtProvider.GenerateToken(user);
-            string newRefreshToken = _jwtProvider.GenerateRefreshToken();
-
-            user.RefreshToken = newRefreshToken;
-            user.RefreshTokenExpireHours = DateTime.UtcNow.AddHours(5);
 
             await _repository.UpdateAsync(user);
             await _unitOfWork.SaveChangesAsync();
@@ -59,7 +53,7 @@ namespace EventsWebApplication.Application.Users.RefreshToken
             return new RefreshTokenResponse
             {
                 JwtToken = newJwtToken,
-                RefreshToken = newRefreshToken
+                RefreshToken = request.RefreshToken,
             };
         }
 

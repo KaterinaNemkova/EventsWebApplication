@@ -47,7 +47,7 @@ namespace EventsWebApplication.Application.Members.UseCases.AddUserToEvent
             var addResult = await _memberRepository.AddAsync(request.EventId,request.UserId,request.DateRegistration);
             if (!addResult)
             {
-                throw new Exception("Error!");
+                throw new InvalidOperationException("Error!");
             }
 
             await _unitOfWork.SaveChangesAsync();

@@ -23,6 +23,11 @@ namespace EventsWebApplication.DataAccess.Repositories
                 .ExecuteUpdateAsync(setter => setter
                 .SetProperty(e => e.EventImage, fileName));
         }
+
+        public async Task<int> GetTotalCountAsync()
+        {
+            return await _context.Events.CountAsync();
+        }
     }
 
 }

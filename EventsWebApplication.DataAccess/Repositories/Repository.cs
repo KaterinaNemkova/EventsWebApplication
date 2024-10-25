@@ -1,6 +1,7 @@
 ﻿using EventsWebApplication.Core.Abstractions;
 using EventsWebApplication.Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace EventsWebApplication.DataAccess.Repositories
 {
@@ -33,9 +34,12 @@ namespace EventsWebApplication.DataAccess.Repositories
             return Task.CompletedTask;
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public async Task<List<T>> GetAllAsync(int pageNumber, int pageSize)
         {
-            return await _entities.ToListAsync();
+            return await _entities
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
         }
 
         public virtual async Task<T?> GetByIdAsync(Guid id)

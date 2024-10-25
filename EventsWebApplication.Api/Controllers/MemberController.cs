@@ -34,12 +34,7 @@ namespace EventsWebApplication.Api.Controllers
            
             var userIdClaim = HttpContext.User.Claims.FirstOrDefault(claim => claim.Type == "userId");
 
-            if (userIdClaim == null)
-            {
-                return Unauthorized();
-            }
-
-            var userId = Guid.Parse(userIdClaim.Value);
+            var userId = Guid.Parse(userIdClaim.Value);                 
 
             await _addUserToEventUseCase.AddToEvent(new AddUserToEventRequest { EventId=eventId, UserId= userId, DateRegistration=DateOnly.FromDateTime(DateTime.Now)});
             return Ok();

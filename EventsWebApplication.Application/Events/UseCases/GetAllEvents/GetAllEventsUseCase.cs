@@ -23,19 +23,15 @@ namespace EventsWebApplication.Application.Events.Services.GetAllEvents
         public async Task<PaginatedResult<EventDto>> GetAll(GetAllEventsRequest request)
         {
             await _validationService.ValidateAsync(request);
-            var eventEntities = await _eventRepository.GetAllAsync();
+            var eventEntities = await _eventRepository.GetAllAsync(request.PageNumber, request.PageSize);
+            var totalCount = await _eventRepository.GetTotalCountAsync();
 
-            var pagedItems = eventEntities
-                .Skip((request.PageNumber - 1) * request.PageSize)
-                .Take(request.PageSize)
-                .ToList();
-
-            var eventsDto = _mapper.Map<List<EventDto>>(pagedItems);
+            var eventsDto = _mapper.Map<List<EventDto>>(eventEntities);
 
             return new PaginatedResult<EventDto>
             {
                 Items = eventsDto,
-                TotalCount = eventEntities.Count,
+                TotalCount = totalCount,
                 PageSize = request.PageSize,
                 PageNumber = request.PageNumber
             };

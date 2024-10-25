@@ -40,15 +40,12 @@ namespace EventsWebApplication.Api.Controllers
 
         }
 
-        [HttpPost("refresh /{refreshToken}")]
+        [HttpPost("refresh")]
 
-        public async Task<IActionResult> Refresh([FromRoute] string refreshToken )
+        public async Task<IActionResult> Refresh([FromBody] string refreshToken )
         {
-            if (!Request.Cookies.TryGetValue("tasty-cookies", out var jwtToken))
-            {
-                return Unauthorized();
-            }
             
+            Request.Cookies.TryGetValue("tasty-cookies", out var jwtToken);
             RefreshTokenResponse response = await _refreshTokenUseCase.Refresh(new RefreshTokenRequest { JwtToken = jwtToken, RefreshToken = refreshToken });
             HttpContext.Response.Cookies.Append("tasty-cookies", response.JwtToken);
             return Ok(response);

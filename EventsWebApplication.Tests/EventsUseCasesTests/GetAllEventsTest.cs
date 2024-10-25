@@ -47,7 +47,7 @@ namespace EventsWebApplication.Tests.EventsUseCases
         };
 
             _validationServiceMock.Setup(v => v.ValidateAsync(request)).Returns(Task.CompletedTask);
-            _eventRepositoryMock.Setup(repo => repo.GetAllAsync()).ReturnsAsync(eventEntities);
+            _eventRepositoryMock.Setup(repo => repo.GetAllAsync(request.PageNumber, request.PageSize)).ReturnsAsync(eventEntities);
 
             var result = await _getAllEventsUseCase.GetAll(request);
 

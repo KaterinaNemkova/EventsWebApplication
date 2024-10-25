@@ -43,7 +43,7 @@ namespace EventsWebApplication.Infrastructure
             return Convert.ToBase64String(randomNumber);
         }
 
-        public ClaimsPrincipal? GetClaimsPrincipal(string token)
+        public ClaimsPrincipal? GetClaimsPrincipal(string? token)
         {
             try
             {
