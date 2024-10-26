@@ -9,7 +9,6 @@ namespace EventsWebApplication.DataAccess.Repositories
     public interface IEventRepository:IRepository<EventEntity>
     {
         Task<EventEntity?> GetByNameAsync(string title);
-        Task<int> GetTotalCountAsync();
         Task UploadImage(Guid eventId, string fileName);
     }
 }

@@ -24,10 +24,7 @@ namespace EventsWebApplication.DataAccess.Repositories
                 .SetProperty(e => e.EventImage, fileName));
         }
 
-        public async Task<int> GetTotalCountAsync()
-        {
-            return await _context.Events.CountAsync();
-        }
+        
     }
 
 }

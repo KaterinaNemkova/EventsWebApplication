@@ -38,15 +38,17 @@ namespace EventsWebApplication.DataAccess.Repositories
             return false;
         }
 
-        public async Task<List<MemberEntity>> GetByEventAsync(Guid eventId)
+        public async Task<List<MemberEntity>> GetByEventAsync(Guid eventId, int pageNumber, int pageSize)
         {
-            var memberEntities = await _context.Events
+            
+            return await _context.Events
                 .AsNoTracking()  
                 .Where(e => e.Id == eventId)
-                .SelectMany(e => e.Members) 
-                .ToListAsync();
+                .SelectMany(e => e.Members)
+                .Skip((pageNumber - 1) * pageSize)
+               .Take(pageSize)
+               .ToListAsync();
 
-            return memberEntities;
         }
 
         public async Task<bool> Delete(Guid eventId, Guid memberId)
@@ -77,6 +79,8 @@ namespace EventsWebApplication.DataAccess.Repositories
             return await _context.Events
                 .AnyAsync(e => e.Id == eventId && e.Members.Any(m => m.Id == memberId));
         }
+
+
 
     }
 }

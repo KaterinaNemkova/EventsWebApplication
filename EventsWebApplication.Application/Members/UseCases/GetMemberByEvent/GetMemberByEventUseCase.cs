@@ -30,19 +30,14 @@ namespace EventsWebApplication.Application.Members.UseCases.GetMemberByEvent
             {
                 throw new KeyNotFoundException("Event not found.");
             }
-            var memberEntities = await _memberRepository.GetByEventAsync(request.EventId);
-
-            var pagedItems = memberEntities
-                .Skip((request.PageNumber - 1) * request.PageSize)
-                .Take(request.PageSize)
-                .ToList();
-
-            var membersDto = _mapper.Map<List<MemberDto>>(pagedItems);
-
+            var memberEntities = await _memberRepository.GetByEventAsync(request.EventId, request.PageNumber, request.PageSize);
+            var totalCount = await _memberRepository.GetTotalCountAsync();
+            var membersDto = _mapper.Map<List<MemberDto>>(memberEntities);
+            
             return new PaginatedResult<MemberDto>
             {
                 Items = membersDto,
-                TotalCount = memberEntities.Count,
+                TotalCount = totalCount,
                 PageSize = request.PageSize,
                 PageNumber = request.PageNumber
             };

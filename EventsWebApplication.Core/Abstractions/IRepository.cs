@@ -8,6 +8,7 @@ namespace EventsWebApplication.Core.Abstractions
         Task Delete(T entity);
         Task<List<T>> GetAllAsync(int pageNumber, int pageSize);
         Task<T?> GetByIdAsync(Guid id);
+        Task<int> GetTotalCountAsync();
         Task UpdateAsync(T entity);
     }
 }

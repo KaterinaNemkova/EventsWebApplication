@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using EventsWebApplication.Application.Users.Registration;
 using EventsWebApplication.Core.Entities;
 using EventsWebApplication.DataAccess.Repositories;
 using EventsWebApplication.DataAccess.UnitOfWork;
@@ -27,31 +26,32 @@ namespace EventsWebApplication.Application.Users.Login
         {
             await _validationService.ValidateAsync(request);
             UserEntity? user=await _repository.GetByEmail(request.Email);
-
+            
             if (user == null)
             {
                 throw new KeyNotFoundException("This user doesn't exist");
             }
+            
             var result = _hasher.Verify(request.Password, user.PasswordHash);
 
             if (result == false)
             {
                 throw new InvalidOperationException("Failed to login");
             }
+            if (user.RefreshTokenExpireHours < DateTime.UtcNow)
+            {
+                throw new InvalidOperationException("You should refresh your refreshToken");
+            }
 
             var jwtToken = _jwtProvider.GenerateToken(user);
-            var refreshToken = _jwtProvider.GenerateRefreshToken();
-
-            user.RefreshToken = refreshToken;
-            user.RefreshTokenExpireHours = DateTime.UtcNow.AddHours(12);
-
+           
             await _repository.UpdateAsync(user);
             await _unitOfWork.SaveChangesAsync();
 
             return new UserLoginResponse
             {
                 JwtToken = jwtToken,
-                RefreshToken = refreshToken
+                RefreshToken = user.RefreshToken
             };
 
         }

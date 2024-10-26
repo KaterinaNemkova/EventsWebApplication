@@ -47,5 +47,10 @@ namespace EventsWebApplication.DataAccess.Repositories
             var entity = await _entities.AsNoTracking().FirstOrDefaultAsync(e=>e.Id==id);
             return entity;
         }
+
+        public async Task<int> GetTotalCountAsync()
+        {
+            return await _entities.CountAsync();
+        }
     }
 }
